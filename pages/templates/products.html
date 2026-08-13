@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Products - MobileParts Pro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h2>All Products</h2>
+        {% if query %}
+        <p class="search-info">Showing results for "{{ query }}"</p>
+        {% endif %}
+    </div>
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x300/1E293B/06B6D4?text={{ product.name|urlencode }}" alt="{{ product.name }}">
+                {% endif %}
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p class="price">${{ product.price }} <span class="currency">USD</span></p>
+            <p class="description">{{ product.description|truncatewords:15 }}</p>
+            <p class="stock">
+                {% if product.stock > 0 %}
+                    <span class="in-stock">● Available</span>
+                {% else %}
+                    <span class="out-stock">● Pre-order</span>
+                {% endif %}
+            </p>
+            {% if product.stock > 0 %}
+            <a href="{% url 'pages:cart_add' product.id %}" class="btn btn-add-cart">Add to Cart</a>
+            {% else %}
+            <a href="{% url 'pages:cart_add' product.id %}" class="btn btn-add-cart btn-preorder">Pre-order</a>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p class="empty-msg">No products found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

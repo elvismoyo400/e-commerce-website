@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - MobileParts Pro{% endblock %}
+
+{% block content %}
+
+  <section class="about-section" id="about">
+    <div class="container">
+
+      <h1>Powering Your Repairs with <span class="highlight">Genuine Parts</span></h1>
+      <p>We keep Zimbabwe's repair shops running. MobileParts Pro sources tested, OEM-grade screens, batteries, and components — no knockoffs, no guesswork, no three-week wait while a customer's phone sits broken on your bench. If it powers a repair, we stock it, we test it, and we get it to you fast.</p>
+
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="icon-box"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3>Screens & LCDs</h3>
+          <p>iPhone, Samsung, Huawei, Tecno, Infinix. Incell, OLED, and original quality options.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-box"><i class="fa-solid fa-battery-full"></i></div>
+          <h3>Batteries & Charging</h3>
+          <p>High-capacity batteries, charging ports, flex cables, wireless charging coils.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-box"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <h3>Tools & Accessories</h3>
+          <p>Professional repair kits, microscopes, cases, screen protectors, chargers.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="section-subtitle">Questions about parts or bulk orders? We respond in under 2 hours.</p>
+
+          <ul class="contact-list">
+            <li><i class="fa-solid fa-location-dot"></i> Gwayi Valley Business Center</li>
+            <li><i class="fa-solid fa-phone"></i> <a href="tel:+263785541777">+263 78 554 1777</a></li>
+            <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/263785541777">WhatsApp Us</a></li>
+            <li><i class="fa-solid fa-envelope"></i> <a href="mailto:sales@mobileparts.co.zw">sales@mobileparts.co.zw</a></li>
+          </ul>
+
+          <div class="social-icons">
+            <a href="https://facebook.com/yourpage" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://instagram.com/yourpage" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com/@yourpage" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div class="contact-form-card">
+          <h3>Send Us a Message</h3>
+          <form method="POST" action="{% url 'pages:about' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+{% endblock %}

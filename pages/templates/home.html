@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Home - MobileParts Pro{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1> <span>MobileParts</span>  Pro</h1>
+            <p class="subtitle">Premium Cellphone Spares & Accessories | Zimbabwe</p>
+            <h2>Quality You Can Trust</h2>
+            <p class="hero-desc">Your #1 source for genuine phone parts, batteries, screens & accessories</p>
+            <div class="hero-features">
+                <span class="badge">✓ 6 month Warranty</span>
+                <span class="badge">✓ Fast Delivery</span>
+                <span class="badge">✓ EcoCash & USD</span>
+            </div>
+            <a href="{% url 'pages:products' %}" class="btn btn-primary">Shop Now</a>
+            <a href="{% url 'pages:about' %}" class="btn btn-secondary">Learn More</a>
+        </div>
+    </div>
+</section>
+
+{% if query %}
+<section class="search-results">
+    <div class="container">
+        <h2>Search Results for "{{ query }}"</h2>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Checkout - MobileParts Pro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h2>Checkout</h2>
+    </div>
+    
+    <div class="checkout-container">
+        <form method="POST" class="checkout-form">
+            {% csrf_token %}
+            <div class="form-section">
+                <h3>Delivery Details</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="full_name" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" placeholder="0771234567" required>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" name="city" value="Harare" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Payment Method</h3>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="ecocash" {% if order and order.payment_method == 'ecocash' %}checked{% elif not order %}checked{% endif %}>
+                        <span class="payment-icon">
+                            <img src="{% static 'images/payments/ecocash.svg' %}" alt="EcoCash">
+                        </span>
+                        <span class="payment-label">EcoCash</span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="bank" {% if order and order.payment_method == 'bank' %}checked{% endif %}>
+                        <span class="payment-icon">
+                            <img src="{% static 'images/payments/bank.svg' %}" alt="Bank Transfer">
+                        </span>
+                        <span class="payment-label">Bank Transfer</span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="onemoney" {% if order and order.payment_method == 'onemoney' %}checked{% endif %}>
+                        <span class="payment-icon">
+                            <img src="{% static 'images/payments/onemoney.svg' %}" alt="OneMoney">
+                        </span>
+                        <span class="payment-label">OneMoney</span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="innbucks" {% if order and order.payment_method == 'innbucks' %}checked{% endif %}>
+                        <span class="payment-icon">
+                            <img src="{% static 'images/payments/innbucks.svg' %}" alt="InnBucks">
+                        </span>
+                        <span class="payment-label">InnBucks</span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="usd" {% if order and order.payment_method == 'usd' %}checked{% endif %}>
+                        <span class="payment-icon">
+                            <img src="{% static 'images/payments/usd.svg' %}" alt="USD Cash">
+                        </span>
+                        <span class="payment-label">USD Cash on Delivery</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">Place Order</button>
+        </form>
+
+        <div class="order-summary">
+            <h3>Your Order</h3>
+            {% for item in cart %}
+            <div class="summary-item">
+                <span>{{ item.product.name }} x{{ item.quantity }}</span>
+                <span>${{ item.total_price }}</span>
+            </div>
+            {% endfor %}
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>${{ cart.get_total_price }} USD</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
