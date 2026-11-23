@@ -1,2 +1,13 @@
+[project]
+name = "e-commerce-website"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=5.2,<7",
+    "gunicorn",
+    "whitenoise",
+    "Pillow",
+]
+
 [tool.vercel]
 entrypoint = "myproject.wsgi:application"
